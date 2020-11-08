@@ -1,12 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {createStore} from 'redux';
+// Providerを使うことで、作成したstoreを全コンポーネントにわたすことができる
+import {Provider} from 'react-redux';
 import './index.css';
-import App from './App';
+import reducer from './reducers'
+import App from './component/App';
 import reportWebVitals from './reportWebVitals';
+
+// このstoreはこのプロジェクトで唯一のもの
+// プロジェクト内のすべてのstateは、このstoreに集約されている
+const store = createStore(reducer)
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+      {/*すべてのコンポーネントでstoreを使うことができる*/}
+      <Provider store={store}>
+          <App />
+      </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
